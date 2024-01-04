@@ -12,7 +12,7 @@ struct ThemeChanger: App {
     var body: some Scene {
         WindowGroup {
             WrapperView()
-                .environmentObject(DataSource())
+                .environment(DataSource())
         }
     }
 }

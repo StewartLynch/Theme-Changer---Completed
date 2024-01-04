@@ -8,26 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var dataSource: DataSource
+    @Environment(DataSource.self) var dataSource: DataSource
     @State private var showModal = false
-    @State private var showDestination = false
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
                 Button("Modal Sheet") {
                     showModal = true
                 }
                 .padding(.top)
-                NavigationLink(
-                    destination: DestinationView(),
-                    isActive: $showDestination,
-                    label: {
-                        Button("Push Navigation") {
-                            showDestination = true
-                        }
-                    })
+                NavigationLink("Push Navigation", destination: DestinationView())
                 Text(Sample.veryLongText)
-                    .foregroundColor(Color(dataSource.selectedTheme.labelColor))
+                    .foregroundStyle(Color(dataSource.selectedTheme.labelColor))
                     .padding()
             }
             .buttonStyle(FilledRoundedCornerButtonStyle(
@@ -36,7 +28,6 @@ struct ContentView: View {
             )
             .navigationTitle("Theme Changer")
         }
-        .navigationViewStyle(StackNavigationViewStyle())
         .sheet(isPresented: $showModal) {
             ModalSheetView()
         }
@@ -45,9 +36,7 @@ struct ContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-            .environmentObject(DataSource())
-    }
+#Preview {
+    ContentView()
+        .environment(DataSource())
 }

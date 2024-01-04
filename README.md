@@ -1,10 +1,26 @@
 # Switching Themes in SwiftUI
 
-This is the completed Project for the YouTube video of the same name
+This accomplishes exactly the same thing but the code has been updated for the Observation Framework and iOS 17\.
 
-The starter project and video is available in the notes for the video.
+Changes Made to Source Files
 
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=lF9fOeUwWF8
-" target="_blank"><img src="http://img.youtube.com/vi/lF9fOeUwWF8/0.jpg" 
-alt="Switching Themes in SwiftUI" width="480" height="360" border="10" /></a>
+### Overall Changes
+
+* Replaced NavigationView with NavigationStack
+* Replaced .navigationBarTitle with .navigationTitle
+* Replaced all PreviewProviders with the new #Preview macro
+* Replaced .navigationBarItems with .toolbar
+* Replaced @EnvironmentObject with @Environment(DataSource.self)
+* Replaced .foregroundColor with .foregroundStyle
+
+### Individual File Changes
+
+#### DataSource
+
+* Changed to use the Observable macro instead of ObservableObject
+* Replace AppStorage as it is not supported in the Onservation Framework to use a getter and setter to store directly in UserDefaults
+
+#### ContentView
+
+* Updated NavigationLink for iOS 17
 

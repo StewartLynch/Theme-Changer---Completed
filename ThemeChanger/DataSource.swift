@@ -7,18 +7,26 @@
 
 import SwiftUI
 
-class DataSource: ObservableObject {
-    @AppStorage("selectedTheme") var selectedThemeAS = 1 {
-        didSet {
-            updateTheme()
+@Observable
+class DataSource {
+        var selectedThemeAS: Int {
+            get {
+                access(keyPath: \.selectedThemeAS)
+                return UserDefaults.standard.integer(forKey: "selectedTheme")
+            }
+            set {
+                withMutation (keyPath: \.selectedThemeAS) {
+                    UserDefaults.standard.setValue (newValue, forKey: "selectedTheme")
+                    updateTheme()
+                }
+            }
         }
-    }
     
     init() {
         updateTheme()
     }
     
-    @Published var selectedTheme: Theme = Theme3()
+    var selectedTheme: Theme = Theme3()
     
     func updateTheme() {
         selectedTheme = ThemeManager.getTheme(selectedThemeAS)

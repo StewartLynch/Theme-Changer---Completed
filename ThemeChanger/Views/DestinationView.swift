@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct DestinationView: View {
-    @EnvironmentObject var dataSource: DataSource
+    @Environment(DataSource.self) var dataSource: DataSource
     @Environment(\.dismiss) private var dismiss
     var body: some View {
             VStack {
                 Text("This view is as a result of a Navigation Link")
-                    .foregroundColor(Color(dataSource.selectedTheme.labelColor))
+                    .foregroundStyle(Color(dataSource.selectedTheme.labelColor))
                     .padding()
                 Button("Dismiss the view") {
                     dismiss()
@@ -24,16 +24,14 @@ struct DestinationView: View {
                             bgColor: Color(dataSource.selectedTheme.primaryColor),
                             fgColor: Color(dataSource.selectedTheme.secondaryColor))
             )
-            .navigationBarTitle("Destination View")
+            .navigationTitle("Destination View")
             .navigationBarTitleDisplayMode(.inline)
     }
 }
 
-struct DestinationView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            DestinationView()
-                .environmentObject(DataSource())
-        }
+#Preview {
+    NavigationStack{
+        DestinationView()
     }
+        .environment(DataSource())
 }

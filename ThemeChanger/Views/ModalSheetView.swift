@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct ModalSheetView: View {
-    @EnvironmentObject var dataSource: DataSource
+    @Environment(DataSource.self) var dataSource: DataSource
     @Environment(\.dismiss) private var dismiss
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
                 Text("This view is as a result of a Modal Sheet presentation")
                     .foregroundColor(Color(dataSource.selectedTheme.labelColor))
@@ -26,20 +26,21 @@ struct ModalSheetView: View {
                 }
                 Spacer()
             }
-            .navigationBarTitle("Modal Sheet View")
+            .navigationTitle("Modal Sheet View")
             .navigationBarTitleDisplayMode(.inline)
-            .navigationBarItems(trailing: Button {
-                dismiss()
-            } label: {
-                Image(systemName: "xmark.circle.fill")
-                    .font(.title2)
-            })
+            .toolbar {
+                Button {
+                    dismiss()
+                } label: {
+                    Image(systemName: "xmark.circle.fill")
+                        .font(.title2)
+                }
+            }
         }
     }
 }
 
-struct ModalSheetView_Previews: PreviewProvider {
-    static var previews: some View {
-        ModalSheetView()
-    }
+#Preview {
+    ModalSheetView()
+        .environment(DataSource())
 }
