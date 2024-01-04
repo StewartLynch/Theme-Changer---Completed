@@ -1,4 +1,5 @@
 # Switching Themes in SwiftUI
+> Note:  Check out the "ObservableFramework_iOS17" branch for updated code
 
 This is the completed Project for the YouTube video of the same name
 
