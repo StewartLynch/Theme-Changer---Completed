@@ -18,7 +18,7 @@ struct FilledRoundedCornerButtonStyle: ButtonStyle {
             .font(font)
             .padding(padding)
             .background(bgColor)
-            .foregroundColor(fgColor)
+            .foregroundStyle(fgColor)
             .cornerRadius(cornerRadius)
             .shadow(radius: 10)
             .scaleEffect(configuration.isPressed ? 0.9 : 1.0)

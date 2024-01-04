@@ -9,14 +9,14 @@ import SwiftUI
 
 struct DestinationView: View {
     @EnvironmentObject var dataSource: DataSource
-    @Environment(\.presentationMode) private var presentationMode
+    @Environment(\.dismiss) private var dismiss
     var body: some View {
             VStack {
                 Text("This view is as a result of a Navigation Link")
                     .foregroundColor(Color(dataSource.selectedTheme.labelColor))
                     .padding()
                 Button("Dismiss the view") {
-                    presentationMode.wrappedValue.dismiss()
+                    dismiss()
                 }
                 Spacer()
             }

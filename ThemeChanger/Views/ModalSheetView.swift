@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ModalSheetView: View {
     @EnvironmentObject var dataSource: DataSource
-    @Environment(\.presentationMode) private var presentationMode
+    @Environment(\.dismiss) private var dismiss
     var body: some View {
         NavigationView {
             VStack {
@@ -19,7 +19,7 @@ struct ModalSheetView: View {
                 ForEach(0..<ThemeManager.themes.count, id: \.self) { theme in
                     Button(ThemeManager.themes[theme].themeName) {
                         dataSource.selectedThemeAS = theme
-                        presentationMode.wrappedValue.dismiss()
+                        dismiss()
                     }
                     .buttonStyle(FilledRoundedCornerButtonStyle(bgColor: Color(ThemeManager.themes[theme].primaryColor),
                                                                 fgColor: Color(ThemeManager.themes[theme].secondaryColor)))
@@ -29,7 +29,7 @@ struct ModalSheetView: View {
             .navigationBarTitle("Modal Sheet View")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(trailing: Button {
-                presentationMode.wrappedValue.dismiss()
+                dismiss()
             } label: {
                 Image(systemName: "xmark.circle.fill")
                     .font(.title2)
